@@ -15,6 +15,7 @@ const draw = (n) => {
     const y = r * Math.sin(a) + window.innerHeight / 2;
 
     const point = document.createElement("div");
+    point.id = n;
     point.classList.add("point");
 
     point.style.top = y + "px";

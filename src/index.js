@@ -1,14 +1,14 @@
 
 import './index.css';
 
-const c = 10;
+let c = 10;
 
 const NUMBER_OF_POINTS = 10000;
 const DELAY_BETWEEN_DRAW = 0; // in ms
 
 const draw = (n) => {
 
-    const a = n * 137.5;
+    const a = n * 68.75 * Math.PI/180;
     const r = c * Math.sqrt(n);
 
     const x = r * Math.cos(a) + window.innerWidth / 2;
@@ -21,14 +21,17 @@ const draw = (n) => {
     point.style.top = y + "px";
     point.style.left = x + "px";
 
+    point.style.background = `rgba(${n % 255}, 255, ${n % 100}, 1)`
+
     document.getElementById("root").append(point);
 
-    setTimeout(() => {
-        if(n < NUMBER_OF_POINTS){
-            draw(n+1);
-        }
-    }, DELAY_BETWEEN_DRAW);
-   
+
+    if(n < NUMBER_OF_POINTS){
+        requestAnimationFrame(() => {
+                draw(n+1);
+        });
+    }
+
 }
 
 window.onload = async () => {
